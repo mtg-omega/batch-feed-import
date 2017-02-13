@@ -1,0 +1,10 @@
+{
+  "log": {
+    "level": "error"
+  },
+
+  "database": {
+    "dialect": "sqlite",
+    "logging": false
+  }
+}

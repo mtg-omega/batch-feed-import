@@ -26,7 +26,9 @@
   "homepage": "https://github.com/mtg-omega/batch-feed-import#readme",
   "dependencies": {
     "feedparser": "^2.1.0",
-    "mtg-omega-models": "git+https://github.com/mtg-omega/models.git"
+    "mtg-omega-models": "git+https://github.com/mtg-omega/models.git",
+    "request": "^2.79.0",
+    "request-promise-native": "^1.0.3"
   },
   "devDependencies": {
     "babel-jest": "^18.0.0",
@@ -36,6 +38,12 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
-    "jest": "^18.1.0"
+    "jest": "^18.1.0",
+    "sqlite3": "^3.1.8"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/((?!mtg-omega-*)(?!hotvenue-*))"
+    ]
   }
 }
