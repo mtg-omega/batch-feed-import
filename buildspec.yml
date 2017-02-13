@@ -17,3 +17,4 @@ artifacts:
     - package.json
     - src/*
     - config/*
+    - node_modules/**/*
