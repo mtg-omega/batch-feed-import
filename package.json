@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/mtg-omega/batch-feed-import#readme",
   "dependencies": {
-
+    "mtg-omega-models": "git+https://github.com/mtg-omega/models.git"
   },
   "devDependencies": {
     "babel-jest": "^18.0.0",
