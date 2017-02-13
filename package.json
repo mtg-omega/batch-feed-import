@@ -1,0 +1,40 @@
+{
+  "name": "mtg-omega-batch-feed-import",
+  "version": "0.0.1",
+  "description": "A Lambda Importer for the feed",
+  "main": "index.js",
+  "scripts": {
+    "eslint": "eslint .",
+    "check": "npm run eslint",
+    "pretest": "npm run check",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtg-omega/batch-feed-import.git"
+  },
+  "keywords": [
+    "lambda",
+    "rds",
+    "rss"
+  ],
+  "author": "Niccolò Olivieri <niccolo@olivieriachille.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mtg-omega/batch-feed-import/issues"
+  },
+  "homepage": "https://github.com/mtg-omega/batch-feed-import#readme",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "babel-jest": "^18.0.0",
+    "babel-preset-airbnb": "^2.1.1",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
+    "jest": "^18.1.0"
+  }
+}
