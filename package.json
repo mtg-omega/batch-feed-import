@@ -7,7 +7,7 @@
     "eslint": "eslint .",
     "check": "npm run eslint",
     "pretest": "npm run check",
-    "test": "jest"
+    "test": "node --harmony ./node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",

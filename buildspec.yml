@@ -1,0 +1,19 @@
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - npm install
+  pre-build:
+    commands:
+      - cat build/production.json > config/production.json
+      - sed -i -e 's/{DB_HOST}/${DB_HOST}/' config/production.json
+  build:
+    commands:
+      - npm test
+
+artifacts:
+  files:
+    - package.json
+    - src/*
+    - config/*
