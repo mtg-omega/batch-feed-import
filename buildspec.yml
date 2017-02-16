@@ -14,9 +14,12 @@ phases:
     commands:
       - echo Build started on `date`
       - npm test
+  post_build:
+    commands:
+      - aws cloudformation package --template-file samTemplate.yaml
+                                   --s3-bucket mtg-omega-lambda
+                                   --output-template-file newSamTemplate.yaml
 artifacts:
+  type: zip
   files:
-    - package.json
-    - src/*
-    - config/*
-    - node_modules/**/*
+    - newSamTemplate.yaml
