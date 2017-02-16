@@ -5,7 +5,7 @@ phases:
     commands:
       - echo Install started on `date`
       - npm install
-  pre-build:
+  pre_build:
     commands:
       - echo PreBuild started on `date`
       - cat build/production.json > config/production.json
