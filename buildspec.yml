@@ -3,15 +3,17 @@ version: 0.1
 phases:
   install:
     commands:
+      - echo Install started on `date`
       - npm install
   pre-build:
     commands:
+      - echo PreBuild started on `date`
       - cat build/production.json > config/production.json
       - sed -i -e 's/{DB_HOST}/${DB_HOST}/' config/production.json
   build:
     commands:
+      - echo Build started on `date`
       - npm test
-
 artifacts:
   files:
     - package.json
