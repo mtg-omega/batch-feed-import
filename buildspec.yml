@@ -10,12 +10,17 @@ phases:
       - echo PreBuild started on `date`
       - cat build/production.json > config/production.json
       - sed -i -e 's/{DB_HOST}/${DB_HOST}/' config/production.json
+      - sed -i -e 's/{DB_USERNAME}/${DB_USERNAME}/' config/production.json
+      - sed -i -e 's/{DB_PASSWORD}/${DB_PASSWORD}/' config/production.json
+      - sed -i -e 's/{DB_DATABASE}/${DB_DATABASE}/' config/production.json
   build:
     commands:
       - echo Build started on `date`
       - npm test
+      - npm run transpile
   post_build:
     commands:
+      - echo PostBuild started on `date`
       - aws cloudformation package --template-file samTemplate.yaml
                                    --s3-bucket mtg-omega-lambda
                                    --output-template-file newSamTemplate.yaml
@@ -23,3 +28,5 @@ artifacts:
   type: zip
   files:
     - newSamTemplate.yaml
+    - config/*
+    - dist/*
