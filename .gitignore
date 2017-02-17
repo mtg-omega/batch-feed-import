@@ -5,6 +5,9 @@ config/local*
 ### Data
 data
 
+### Dist
+dist
+
 ### Node template
 # Logs
 logs
