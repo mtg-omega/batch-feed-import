@@ -1,6 +1,6 @@
 import request from 'request-promise-native';
 import FeedParser from 'feedparser';
-import { Feed, Article } from 'mtg-omega-models/sql';
+import { Feed, Article } from 'mtg-omega-models-sql';
 
 function parseRss(rss) {
   const feedparser = new FeedParser();

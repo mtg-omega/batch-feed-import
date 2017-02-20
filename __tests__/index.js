@@ -1,4 +1,4 @@
-import { sequelize, Feed, Article } from 'mtg-omega-models/sql';
+import { sequelize, Feed, Article } from 'mtg-omega-models-sql';
 
 import { batch } from '../src';
 
