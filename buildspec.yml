@@ -21,6 +21,11 @@ phases:
   post_build:
     commands:
       - echo PostBuild started on `date`
+      - rm -rf node_modules
+      - npm install --production
+      - rm -rf __tests__
+      - rm -rf build
+      - rm -rf src
       - aws cloudformation package --template-file samTemplate.yaml
                                    --s3-bucket mtg-omega-lambda
                                    --output-template-file newSamTemplate.yaml
