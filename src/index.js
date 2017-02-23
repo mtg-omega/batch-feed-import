@@ -4,11 +4,15 @@ require('babel-polyfill');
 import request from 'request-promise-native';
 import FeedParser from 'feedparser';
 import { Feed, Article } from 'mtg-omega-models-sql';
+import { log } from 'zweer-utils';
 /* eslint-enable import/first */
 
 function parseRss(rss) {
   const feedparser = new FeedParser();
   const articles = [];
+
+  log.silly(rss);
+  log.info('Parsing rss');
 
   return new Promise((resolve, reject) => {
     feedparser
@@ -32,13 +36,19 @@ function parseRss(rss) {
 
 export async function batch() {
   const feeds = await Feed.findAll();
+  const totFeeds = feeds.length;
 
-  for (let i = 0, totFeeds = feeds.length; i < totFeeds; i += 1) {
+  log.info(`Found ${totFeeds} feed[s]`);
+
+  for (let i = 0; i < totFeeds; i += 1) {
     const feed = feeds[i];
     const url = feed.url;
 
     const rss = await request(url);
     const { meta, articles } = await parseRss(rss);
+    const totArticles = articles.length;
+
+    log.info(`Working on feed "${feed.title}": ${totArticles} article[s] found`);
 
     feed.title = meta.title;
     feed.description = meta.description;
@@ -58,11 +68,13 @@ export async function batch() {
 
     await feed.save();
 
-    for (let j = 0, totArticles = articles.length; j < totArticles; j += 1) {
+    for (let j = 0; j < totArticles; j += 1) {
       const article = articles[j];
 
       const articleCount = await Article.count({ where: { guid: article.guid } });
       if (articleCount === 0) {
+        log.info(`Article ${article.title} is new!`);
+
         await feed.createArticle({
           title: article.title,
           description: article.description,
@@ -83,12 +95,22 @@ export async function batch() {
           articleUpdatedAt: new Date(article.date),
           articlePublishedAt: new Date(article.pubdate),
         });
+      } else {
+        log.info(`Article ${article.title} is already in our database!`);
       }
     }
+
+    log.info(`Finished working on feed "${feed.title}"`);
   }
 }
 
 export function handler(event, context, done) { // eslint-disable-line import/prefer-default-export
   return batch()
-    .then(() => done());
+    .then(() => done())
+    .catch((err) => {
+      log.error('Error while executing the batch');
+      log.info(err);
+
+      done(err);
+    });
 }

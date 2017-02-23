@@ -31,7 +31,8 @@
     "mtg-omega-models-sql": "^1.0.3",
     "mysql": "^2.13.0",
     "request": "^2.79.0",
-    "request-promise-native": "^1.0.3"
+    "request-promise-native": "^1.0.3",
+    "zweer-utils": "^0.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
