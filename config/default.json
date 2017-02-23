@@ -4,6 +4,7 @@
   },
 
   "database": {
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": true
   }
 }
