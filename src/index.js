@@ -1,6 +1,10 @@
+require('babel-polyfill');
+
+/* eslint-disable import/first */
 import request from 'request-promise-native';
 import FeedParser from 'feedparser';
 import { Feed, Article } from 'mtg-omega-models-sql';
+/* eslint-enable import/first */
 
 function parseRss(rss) {
   const feedparser = new FeedParser();
