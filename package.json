@@ -28,7 +28,7 @@
   "dependencies": {
     "feedparser": "^2.1.0",
     "mtg-omega-models-sql": "^1.0.3",
-    "mysql2": "^1.2.0",
+    "mysql": "^2.13.0",
     "request": "^2.79.0",
     "request-promise-native": "^1.0.3"
   },
