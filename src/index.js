@@ -3,6 +3,7 @@ require('babel-polyfill');
 /* eslint-disable import/first */
 import request from 'request-promise-native';
 import FeedParser from 'feedparser';
+import config from 'config';
 import { Feed, Article } from 'mtg-omega-models-sql';
 import { log } from 'zweer-utils';
 /* eslint-enable import/first */
@@ -32,6 +33,42 @@ function parseRss(rss) {
       })
       .end(rss);
   });
+}
+
+export async function check() {
+  const feedsToImport = config.get('app.batch-feed-import.feeds');
+  const feeds = await Feed.findAll({
+    where: {
+      url: {
+        $notIn: feedsToImport,
+      },
+    },
+  });
+
+  log.info(`Found ${feeds.length} feed[s] to delete`);
+
+  for (let i = 0, tot = feeds.length; i < tot; i += 1) {
+    const feed = feeds[i];
+
+    log.info(`Removing feed: ${feed.url}`);
+
+    await feed.destroy();
+  }
+}
+
+export async function init() {
+  const feedsToImport = config.get('app.batch-feed-import.feeds');
+
+  for (let i = 0, tot = feedsToImport.length; i < tot; i += 1) {
+    const url = feedsToImport[i];
+    const [feed, isNew] = await Feed.findCreateFind({
+      where: {
+        url,
+      },
+    });
+
+    log.info(`Feed ${feed.url} is ${isNew ? 'new' : 'old'}`);
+  }
 }
 
 export async function batch() {
@@ -106,6 +143,8 @@ export async function batch() {
 
 export function handler(event, context, done) {
   return Promise.resolve()
+    .then(() => check())
+    .then(() => init())
     .then(() => batch())
     .then(() => done())
     .catch((err) => {

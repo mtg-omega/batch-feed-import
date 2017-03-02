@@ -27,6 +27,7 @@
   "homepage": "https://github.com/mtg-omega/batch-feed-import#readme",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
+    "config": "^1.25.1",
     "feedparser": "^2.1.0",
     "mtg-omega-models-sql": "^1.0.3",
     "mysql": "^2.13.0",
