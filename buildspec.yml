@@ -5,7 +5,6 @@ phases:
     commands:
       - echo Install started on `date`
       - npm install
-      - git submodule update --init --recursive
   pre_build:
     commands:
       - echo PreBuild started on `date`
