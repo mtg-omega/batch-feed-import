@@ -104,7 +104,7 @@ export async function batch() {
   }
 }
 
-export function handler(event, context, done) { // eslint-disable-line import/prefer-default-export
+export function handler(event, context, done) {
   return Promise.resolve()
     .then(() => batch())
     .then(() => done())
