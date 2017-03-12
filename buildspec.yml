@@ -8,6 +8,8 @@ phases:
   pre_build:
     commands:
       - echo PreBuild started on `date`
+      - git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@git-codecommit.eu-west-1.amazonaws.com/v1/repos/mtg-omega-config config
+      - rm -rf config/.git
   build:
     commands:
       - echo Build started on `date`
