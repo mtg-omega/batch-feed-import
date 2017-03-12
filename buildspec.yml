@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       - echo Install started on `date`
-      - npm install
+      - npm install > /dev/null
   pre_build:
     commands:
       - echo PreBuild started on `date`
@@ -19,9 +19,10 @@ phases:
     commands:
       - echo PostBuild started on `date`
       - rm -rf node_modules
-      - npm install --production
+      - npm install --production > /dev/null
       - rm -rf __tests__
       - rm -rf src
+      - rm -rf jest
       - aws cloudformation package --template-file samTemplate.yaml
                                    --s3-bucket mtg-omega-lambda
                                    --output-template-file newSamTemplate.yaml
@@ -29,5 +30,3 @@ artifacts:
   type: zip
   files:
     - newSamTemplate.yaml
-    - config/*
-    - dist/*
