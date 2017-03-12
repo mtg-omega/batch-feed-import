@@ -36,6 +36,8 @@ function parseRss(rss) {
 }
 
 export async function check() {
+  log.info('Check phase begun');
+
   const feedsToImport = config.get('app.batch-feed-import.feeds');
   const feeds = await Feed.findAll({
     where: {
@@ -57,6 +59,8 @@ export async function check() {
 }
 
 export async function init() {
+  log.info('Init phase begun');
+
   const feedsToImport = config.get('app.batch-feed-import.feeds');
 
   for (let i = 0, tot = feedsToImport.length; i < tot; i += 1) {
@@ -72,6 +76,8 @@ export async function init() {
 }
 
 export async function batch() {
+  log.info('Batch phase begun');
+
   const feeds = await Feed.findAll();
   const totFeeds = feeds.length;
 
