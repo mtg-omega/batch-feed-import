@@ -150,10 +150,11 @@ export async function batch() {
 }
 
 export function handler(event, context, done) {
-  log.info('handler');
-  console.log('handler');
+  log.info('handler log.info');
+  console.log('handler console.log');
 
   return Promise.resolve()
+    .then(() => console.log('------------- then'))
     .then(() => sequelize.sync())
     .then(() => check())
     .then(() => init())
