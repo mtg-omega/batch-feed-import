@@ -1,7 +1,7 @@
 import config from 'config';
 import { sequelize, Feed, Article } from 'mtg-omega-models-sql';
 
-import { batch, init, check } from '../src';
+import { batch, init, check, handler } from '../src';
 
 describe('Feed Importer', () => {
   beforeEach(() => sequelize.sync({ force: true }));
@@ -31,4 +31,14 @@ describe('Feed Importer', () => {
     .then(() => check())
     .then(() => Feed.findAll())
     .then(feeds => expect(feeds).toHaveLength(0)));
+
+  it('should do everything', () => handler()
+    .then(() => Promise.all([
+      Feed.findAll({ include: [{ model: Article }] }),
+      Article.findAll(),
+    ]))
+    .then(([feeds, articles]) => {
+      expect(feeds).toHaveLength(feedsToImport.length);
+      expect(articles).not.toHaveLength(0);
+    }));
 });

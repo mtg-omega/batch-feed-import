@@ -153,6 +153,11 @@ export function handler(event, context, done) {
   log.info('handler log.info');
   console.log('handler console.log');
 
+  if (typeof done === 'undefined') {
+    console.log('Redefining "done" param');
+    done = () => {}; // eslint-disable-line no-param-reassign
+  }
+
   return Promise.resolve()
     .then(() => console.log('------------- then'))
     .then(() => sequelize.sync())
@@ -161,6 +166,7 @@ export function handler(event, context, done) {
     .then(() => batch())
     .then(() => done())
     .catch((err) => {
+      console.log('Error: ', err);
       log.error('Error while executing the batch');
       log.info(err);
 
