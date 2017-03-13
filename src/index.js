@@ -148,6 +148,8 @@ export async function batch() {
 }
 
 export function handler(event, context, done) {
+  console.log('test test test');
+
   return Promise.resolve()
     .then(() => check())
     .then(() => init())
