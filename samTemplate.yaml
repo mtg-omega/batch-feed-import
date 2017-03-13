@@ -10,6 +10,7 @@ Resources:
       Handler: dist/debug.handler
       Runtime: nodejs4.3
       CodeUri: ./
+      Role: arn:aws:iam::390360040979:role/lambda-batch
       VpcConfig:
         SecurityGroupIds:
           - sg-4a08f833
