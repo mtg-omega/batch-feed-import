@@ -10,6 +10,13 @@ Resources:
       Handler: dist/debug.handler
       Runtime: nodejs4.3
       CodeUri: ./
+      VpcConfig:
+        SecurityGroupIds:
+          - sg-4a08f833
+        SubnetIds:
+          - subnet-db2693ad
+          - subnet-be995ee6
+          - subnet-310d8a55
       Environment:
         Variables:
           NODE_ENV: production
