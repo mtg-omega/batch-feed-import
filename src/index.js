@@ -1,5 +1,7 @@
 require('babel-polyfill');
 
+console.log('before');
+
 /* eslint-disable import/first */
 import request from 'request-promise-native';
 import FeedParser from 'feedparser';
@@ -148,7 +150,8 @@ export async function batch() {
 }
 
 export function handler(event, context, done) {
-  console.log('test test test');
+  log.info('handler');
+  console.log('handler');
 
   return Promise.resolve()
     .then(() => sequelize.sync())
