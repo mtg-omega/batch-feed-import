@@ -4,7 +4,7 @@ require('babel-polyfill');
 import request from 'request-promise-native';
 import FeedParser from 'feedparser';
 import config from 'config';
-import { Feed, Article } from 'mtg-omega-models-sql';
+import { Feed, Article, sequelize } from 'mtg-omega-models-sql';
 import { log } from 'zweer-utils';
 /* eslint-enable import/first */
 
@@ -151,6 +151,7 @@ export function handler(event, context, done) {
   console.log('test test test');
 
   return Promise.resolve()
+    .then(() => sequelize.sync())
     .then(() => check())
     .then(() => init())
     .then(() => batch())
