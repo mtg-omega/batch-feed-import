@@ -161,10 +161,15 @@ export function handler(event, context, done) {
   return Promise.resolve()
     .then(() => console.log('------------- then'))
     .then(() => sequelize.sync())
+    .then(() => console.log('------------- sync'))
     .then(() => check())
+    .then(() => console.log('------------- check'))
     .then(() => init())
+    .then(() => console.log('------------- init'))
     .then(() => batch())
+    .then(() => console.log('------------- batch'))
     .then(() => done())
+    .then(() => console.log('------------- done'))
     .catch((err) => {
       console.log('Error: ', err);
       log.error('Error while executing the batch');
