@@ -150,9 +150,6 @@ export async function batch() {
 }
 
 export async function handler(event, context, done) {
-  log.info('handler log.info');
-  console.log('handler console.log');
-
   if (typeof done === 'undefined') {
     console.log('Redefining "done" param');
     done = () => {}; // eslint-disable-line no-param-reassign
