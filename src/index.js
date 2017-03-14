@@ -149,7 +149,7 @@ export async function batch() {
   }
 }
 
-export function handler(event, context, done) {
+export async function handler(event, context, done) {
   log.info('handler log.info');
   console.log('handler console.log');
 
@@ -158,23 +158,26 @@ export function handler(event, context, done) {
     done = () => {}; // eslint-disable-line no-param-reassign
   }
 
-  return Promise.resolve()
-    .then(() => console.log('------------- then'))
-    .then(() => sequelize.sync())
-    .then(() => console.log('------------- sync'))
-    .then(() => check())
-    .then(() => console.log('------------- check'))
-    .then(() => init())
-    .then(() => console.log('------------- init'))
-    .then(() => batch())
-    .then(() => console.log('------------- batch'))
-    .then(() => done())
-    .then(() => console.log('------------- done'))
-    .catch((err) => {
-      console.log('Error: ', err);
-      log.error('Error while executing the batch');
-      log.info(err);
+  try {
+    console.log('----- sync');
+    await sequelize.sync();
 
-      done(err);
-    });
+    console.log('----- check');
+    await check();
+
+    console.log('----- init');
+    await init();
+
+    console.log('----- batch');
+    await batch();
+
+    console.log('----- done');
+    done();
+  } catch (err) {
+    console.log('Error: ', err);
+    log.error('Error while executing the batch');
+    log.info(err);
+
+    done(err);
+  }
 }

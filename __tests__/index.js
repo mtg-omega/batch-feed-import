@@ -40,5 +40,5 @@ describe('Feed Importer', () => {
     .then(([feeds, articles]) => {
       expect(feeds).toHaveLength(feedsToImport.length);
       expect(articles).not.toHaveLength(0);
-    }));
+    }), 10000);
 });
