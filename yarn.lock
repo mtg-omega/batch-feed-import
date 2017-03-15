@@ -2590,13 +2590,13 @@ ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
 
-mtg-omega-models-sql@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/mtg-omega-models-sql/-/mtg-omega-models-sql-1.0.3.tgz#5b53787656ccc67a3c831f6abb918833e7002f5e"
+mtg-omega-models-sql@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/mtg-omega-models-sql/-/mtg-omega-models-sql-1.0.4.tgz#68e83cf15b9a4cdf9e9ee40e8855adfd5cc095d5"
   dependencies:
     config "^1.24.0"
     sequelize "^3.28.0"
-    zweer-utils "^0.0.1"
+    zweer-utils "^0.0.2"
 
 mute-stream@0.0.5:
   version "0.0.5"
@@ -3673,14 +3673,6 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
-
-zweer-utils@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/zweer-utils/-/zweer-utils-0.0.1.tgz#20fd885ba5c997959340aece88664798575834f7"
-  dependencies:
-    config "^1.25.1"
-    moment "^2.17.1"
-    winston "^2.3.1"
 
 zweer-utils@^0.0.2:
   version "0.0.2"
