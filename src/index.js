@@ -87,8 +87,14 @@ export async function batch() {
     const feed = feeds[i];
     const url = feed.url;
 
-    const rss = await request(url);
+    log.debug('Doing request');
+    const rss = await request({
+      url,
+      timeout: 5000,
+    });
+    log.debug('Request done');
     const { meta, articles } = await parseRss(rss);
+    log.debug('Parsing done');
     const totArticles = articles.length;
 
     log.info(`Working on feed "${feed.title}": ${totArticles} article[s] found`);
