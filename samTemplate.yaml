@@ -15,9 +15,9 @@ Resources:
         SecurityGroupIds:
           - sg-4a08f833
         SubnetIds:
-          - subnet-db2693ad
-          - subnet-be995ee6
-          - subnet-310d8a55
+          - subnet-1ee0ff68
+          - subnet-b96932e1
+          - subnet-4fb0af2b
       Environment:
         Variables:
           NODE_ENV: production
