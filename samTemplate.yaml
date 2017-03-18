@@ -7,6 +7,9 @@ Resources:
   MtgOmegaBatchFeedImport:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: MtgOmega-Batch-FeedImport
+      Description: Import specified feeds' articles into our database
+      Timeout: 30
       Handler: dist/index.handler
       Runtime: nodejs4.3
       CodeUri: ./
