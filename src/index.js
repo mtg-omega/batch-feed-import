@@ -1,7 +1,5 @@
 require('babel-polyfill');
 
-console.log('before');
-
 /* eslint-disable import/first */
 import request from 'request-promise-native';
 import FeedParser from 'feedparser';
@@ -89,8 +87,14 @@ export async function batch() {
     const feed = feeds[i];
     const url = feed.url;
 
-    const rss = await request(url);
+    log.debug('Doing request');
+    const rss = await request({
+      url,
+      timeout: 5000,
+    });
+    log.debug('Request done');
     const { meta, articles } = await parseRss(rss);
+    log.debug('Parsing done');
     const totArticles = articles.length;
 
     log.info(`Working on feed "${feed.title}": ${totArticles} article[s] found`);
@@ -151,27 +155,18 @@ export async function batch() {
 
 export async function handler(event, context, done) {
   if (typeof done === 'undefined') {
-    console.log('Redefining "done" param');
+    log.debug('Redefining "done" param');
     done = () => {}; // eslint-disable-line no-param-reassign
   }
 
   try {
-    console.log('----- sync');
     await sequelize.sync();
-
-    console.log('----- check');
     await check();
-
-    console.log('----- init');
     await init();
-
-    console.log('----- batch');
     await batch();
 
-    console.log('----- done');
     done();
   } catch (err) {
-    console.log('Error: ', err);
     log.error('Error while executing the batch');
     log.info(err);
 
